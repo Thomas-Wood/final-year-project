@@ -21,3 +21,7 @@ FROST is a server implementaiton of the SensorThings API standard. The Flask app
 ## Simulated Sensors
 
 The simulated sensors will have a interface that represents a sensor collecting data at regular intervals. It does not need to actually collect data but could take semi-random values from a standard deviation set. These will likey be set up as docker containers and programatically created so many instances of sensors can be made for testing purposes.
+
+## Running the project
+
+The aim is to have a script that will run the flask application and spin up the sensors and FROST server all in one go. Instructions to follow...
