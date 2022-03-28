@@ -45,6 +45,13 @@ print("Datastreams created at:")
 for link in datastreamLinks:
     print(link)
 
+# Send test observations
+observationLinks = postToServer(
+    'SampleObservations.json', 'Datastreams(1)/Observations')
+print("Observations created at:")
+for link in observationLinks:
+    print(link)
+
 # Send regular observations to the FROST server
 # Uses scheduler library: https://github.com/dbader/schedule
 
