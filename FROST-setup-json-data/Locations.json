@@ -1,0 +1,13 @@
+{
+  "values": [
+    {
+			"name": "Malt Loaf Factory",
+			"description": "The Malt Loaf Factory",
+			"encodingType": "application/vnd.geo+json",
+			"location": {
+				"type": "Point",
+				"coordinates": [53.462892, -2.3252328]
+		  }
+    }
+  ]
+}

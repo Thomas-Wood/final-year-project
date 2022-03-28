@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "name": "Storage System",
+      "description": "The storage system of sensors for the malt loaf factory",
+      "properties": {},
+      "Locations": [
+        {"@iot.id": 1}
+      ]
+    }
+  ]
+}

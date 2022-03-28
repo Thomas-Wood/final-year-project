@@ -1,0 +1,19 @@
+{
+  "values": [
+    {
+      "name": "Weight",
+      "definition": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#Weight",
+      "description": "The weight"
+    },
+    {
+      "name": "Pressure",
+      "definition": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#Pressure",
+      "description": "The pressure"
+    },
+    {
+      "name": "Angular Frequency",
+      "definition": "https://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AngularFrequency",
+      "description": "The rate of rotation"
+    }
+  ]
+}
