@@ -2,6 +2,10 @@
 
 This contains the implementation of my final year project.
 
+## Conventional Commits
+
+This project follows the [conventional commits specification](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) which enables easy understanding of commits and allows for automatic versioning.
+
 ## Project Components
 
 The project is made up of the following key components:
