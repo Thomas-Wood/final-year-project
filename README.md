@@ -30,7 +30,7 @@ To spin up the docker contains, run:
 
     docker-compose up
 
-To set up the all the starting entities required, run the simulatedSensorSetup.py script.
+To set up the all the starting entities required, run the simulatedSensorSetup.py script in the simulatedSensors folder
 
 This adds:
 

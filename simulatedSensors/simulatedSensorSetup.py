@@ -1,7 +1,5 @@
 import requests
 import json
-import schedule
-import time
 
 
 def postToServer(file, entityName):
@@ -46,27 +44,8 @@ for link in datastreamLinks:
     print(link)
 
 # Send test observations
-observationLinks = postToServer(
-    'SampleObservations.json', 'Datastreams(1)/Observations')
-print("Observations created at:")
-for link in observationLinks:
-    print(link)
-
-# Send regular observations to the FROST server
-# Uses scheduler library: https://github.com/dbader/schedule
-
-
-# def sensorOne():
-#     print("Sensor 1 output")
-
-
-# def sensorTwo():
-#     print("Sensor 2 output")
-
-
-# schedule.every(5).seconds.do(sensorOne)
-# schedule.every(1).seconds.do(sensorTwo)
-
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+# observationLinks = postToServer(
+#     'SampleObservations.json', 'Datastreams(1)/Observations')
+# print("Observations created at:")
+# for link in observationLinks:
+#     print(link)
