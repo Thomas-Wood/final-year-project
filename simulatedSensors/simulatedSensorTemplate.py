@@ -24,12 +24,12 @@ class simulatedSensorTemplate:
         return response.headers['location']
 
     def generateObservation(self):
-        self.lastResultTime.datetime.datetime.now()
         timeFormat = "%Y-%m-%dT%H:%M:%SZ"
         formattedTime = self.lastResultTime.strftime(timeFormat)
         self.lastResult = self.getNextResult()
         data = '{"phenomenonTime": "' + formattedTime + \
             '", "result": ' + str(self.lastResult) + '}'
+        self.lastResultTime = datetime.datetime.now()
         return data
 
     # Overriden by child classes

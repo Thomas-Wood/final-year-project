@@ -26,8 +26,6 @@ class weightWheatFlourSiloSensor(simulatedSensorTemplate.simulatedSensorTemplate
         requiresRefill = self.lastResult <= self.startRefillLimit
         if requiresRefill or self.refillInProgress:
             workingWeightInSilo += self.refillRatePerSecond*secondsPassed
-            print("Refilling " + str(self.refillRatePerSecond *
-                  secondsPassed) + " over " + str(secondsPassed) + " seconds")
             self.currentRefillTotal += self.refillRatePerSecond*secondsPassed
             if self.currentRefillTotal >= self.limitPerRefill:
                 self.refillInProgress = False
