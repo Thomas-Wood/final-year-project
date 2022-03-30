@@ -42,10 +42,3 @@ datastreamLinks = postToServer(
 print("Datastreams created at:")
 for link in datastreamLinks:
     print(link)
-
-# Send test observations
-# observationLinks = postToServer(
-#     'SampleObservations.json', 'Datastreams(1)/Observations')
-# print("Observations created at:")
-# for link in observationLinks:
-#     print(link)

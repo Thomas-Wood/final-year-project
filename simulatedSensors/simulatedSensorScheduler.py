@@ -1,6 +1,6 @@
 import schedule
 import time
-import simulatedSensorTemplate
+from simulatedStorageSystemSensors.weightWheatFlourSiloSensor import weightWheatFlourSiloSensor
 
 # Send regular observations to the FROST server
 # Uses scheduler library: https://github.com/dbader/schedule
@@ -9,10 +9,17 @@ import simulatedSensorTemplate
 # Add to scheduler
 # Repeat for all other sensors
 
-testSensor = simulatedSensorTemplate.simulatedSensorTemplate(
-    'http://localhost:8080/FROST-Server/v1.0/', '1')
+sensorList = []
 
-schedule.every(3).seconds.do(testSensor.sendObservation)
+sensorList.append({
+    'sensor': weightWheatFlourSiloSensor(
+        'http://localhost:8080/FROST-Server/v1.0/', '1'),
+    'secondsBetweenReading': 3
+})
+
+for sensorSchedule in sensorList:
+    schedule.every(sensorSchedule['secondsBetweenReading']).seconds.do(
+        sensorSchedule['sensor'].sendObservation)
 
 while True:
     schedule.run_pending()

@@ -7,6 +7,13 @@ class simulatedSensorTemplate:
         self.serverRoot = serverRoot
         self.datastreamID = datastreamID
         self.logging = logging
+        self.lastResult = None
+        self.lastResultTime = None
+        self.firstTimeSetup()
+
+    # Overriden by child classes
+    def firstTimeSetup(self):
+        pass
 
     def sendObservation(self):
         response = requests.post(
@@ -17,11 +24,14 @@ class simulatedSensorTemplate:
         return response.headers['location']
 
     def generateObservation(self):
+        self.lastResultTime.datetime.datetime.now()
         timeFormat = "%Y-%m-%dT%H:%M:%SZ"
-        currentTime = datetime.datetime.now().strftime(timeFormat)
-        data = '{"phenomenonTime": "' + currentTime + \
-            '", "result": ' + self.getNextResult() + '}'
+        formattedTime = self.lastResultTime.strftime(timeFormat)
+        self.lastResult = self.getNextResult()
+        data = '{"phenomenonTime": "' + formattedTime + \
+            '", "result": ' + str(self.lastResult) + '}'
         return data
 
+    # Overriden by child classes
     def getNextResult(self):
         return '1'
