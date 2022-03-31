@@ -2,48 +2,5 @@
 	"name": "Storage System",
 	"description": "The storage system of sensors for the malt loaf factory",
 	"properties": {},
-	"Datastreams": [
-		{
-			"name": "Weight - Wheat Flour Silo",
-			"description": "The weight of the wheat flour in the storage silo",
-			"observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-			"unitOfMeasurement": {
-				"name": "Kilograms",
-				"symbol": "Kg",
-				"definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Kilogram"
-			},
-			"Sensor": {
-				"name": "Wheat Silo Sensor - Weight",
-				"description": "Weight sensor for wheat silo",
-				"encodingType": "text/html",
-				"metadata": "https://www.theengineer.co.uk/supplier-network/product/data-sheet-t20-low-profile-load-cell-assembly-for-silo-tank-and-vessel-weighing/"
-			},
-			"ObservedProperty": {
-				"name": "Weight",
-				"definition": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#Weight",
-				"description": "The weight"
-			}
-		},
-		{
-			"name": "Weight - Malt Flour Silo",
-			"description": "The weight of the malt flour in the storage silo",
-			"observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
-			"unitOfMeasurement": {
-				"name": "Kilograms",
-				"symbol": "Kg",
-				"definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Kilogram"
-			},
-			"Sensor": {
-				"name": "Malt Silo Sensor - Weight",
-				"description": "Weight sensor for malt silo",
-				"encodingType": "text/html",
-				"metadata": "https://www.theengineer.co.uk/supplier-network/product/data-sheet-t20-low-profile-load-cell-assembly-for-silo-tank-and-vessel-weighing/"
-			},
-			"ObservedProperty": {
-				"name": "Weight",
-				"definition": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#Weight",
-				"description": "The weight"
-			}
-		}
-	]
+	"Datastreams": []
 }

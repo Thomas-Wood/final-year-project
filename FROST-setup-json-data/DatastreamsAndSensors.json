@@ -43,6 +43,72 @@
       "Thing": {
         "@iot.id": 1
       }
+    },
+    {
+      "name": "Weight - Starch Hopper",
+      "description": "The weight of the starch in the hopper",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Kilograms",
+        "symbol": "Kg",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Kilogram"
+      },
+      "Sensor": {
+        "name": "Starch Sensor - Weight",
+        "description": "Weight sensor for starch hopper",
+        "encodingType": "text/html",
+        "metadata": "https://www.theengineer.co.uk/supplier-network/product/data-sheet-t20-low-profile-load-cell-assembly-for-silo-tank-and-vessel-weighing/"
+      },
+      "ObservedProperty": {
+        "@iot.id": 1
+      },
+      "Thing": {
+        "@iot.id": 1
+      }
+    },
+    {
+      "name": "Weight - Malt Extract Tank",
+      "description": "The weight of the malt extract in the storage tank",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Kilograms",
+        "symbol": "Kg",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Kilogram"
+      },
+      "Sensor": {
+        "name": "Malt extract tank Sensor - Weight",
+        "description": "Weight sensor for malt extract tank",
+        "encodingType": "text/html",
+        "metadata": "https://www.theengineer.co.uk/supplier-network/product/data-sheet-t20-low-profile-load-cell-assembly-for-silo-tank-and-vessel-weighing/"
+      },
+      "ObservedProperty": {
+        "@iot.id": 1
+      },
+      "Thing": {
+        "@iot.id": 1
+      }
+    },
+    {
+      "name": "Weight - Black Inverted Sugar Tank",
+      "description": "The weight of the Black Inverted Sugar in the storage tank",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Kilograms",
+        "symbol": "Kg",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Kilogram"
+      },
+      "Sensor": {
+        "name": "Black Inverted Sugar Sensor - Weight",
+        "description": "Weight sensor for Black Inverted Sugar Tank",
+        "encodingType": "text/html",
+        "metadata": "https://www.theengineer.co.uk/supplier-network/product/data-sheet-t20-low-profile-load-cell-assembly-for-silo-tank-and-vessel-weighing/"
+      },
+      "ObservedProperty": {
+        "@iot.id": 1
+      },
+      "Thing": {
+        "@iot.id": 1
+      }
     }
   ]
 }
