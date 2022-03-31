@@ -1,5 +1,6 @@
 import schedule
 import time
+from simulatedStorageSystemSensors.weightMaltFlourSiloSensor import weightMaltFlourSiloSensor
 from simulatedStorageSystemSensors.weightWheatFlourSiloSensor import weightWheatFlourSiloSensor
 
 # Send regular observations to the FROST server
@@ -13,8 +14,13 @@ sensorList = []
 
 sensorList.append({
     'sensor': weightWheatFlourSiloSensor(
-        'http://localhost:8080/FROST-Server/v1.0/', '1'),
+        'http://localhost:8080/FROST-Server/v1.0/', '1', False),
     'secondsBetweenReading': 3
+})
+
+sensorList.append({
+    'sensor': weightMaltFlourSiloSensor('http://localhost:8080/FROST-Server/v1.0/', '2'),
+    'secondsBetweenReading': 2
 })
 
 for sensorSchedule in sensorList:
