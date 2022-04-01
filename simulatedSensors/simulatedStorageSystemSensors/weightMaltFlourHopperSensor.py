@@ -2,17 +2,17 @@ import simulatedSensorTemplate
 import datetime
 
 
-class weightMaltFlourSiloSensor(simulatedSensorTemplate.simulatedSensorTemplate):
+class weightMaltFlourHopperSensor(simulatedSensorTemplate.simulatedSensorTemplate):
 
     def firstTimeSetup(self):
         self.lastResultTime = datetime.datetime.now()
-        self.lastResult = 20000  # 20 Tonnes of flour in the silo
+        self.lastResult = 1000  # 1 Tonne of flour in the silo
         self.usePerSecond = 0.25  # 0.25 Kg used per second
-        self.refillRatePerSecond = 11  # Tanker fills silo at 11 kg per second
-        self.startRefillLimit = 7000  # Start refilling at 7 Tonnes
+        self.refillRatePerSecond = 100  # bag emptied at 100 kg per second
+        self.startRefillLimit = 20  # Start refilling at 20 kg
         self.refillInProgress = False
         self.currentRefillTotal = 0  # How much weight has been delivered so far
-        self.limitPerRefill = 15000  # Number of Kg per lorry delivery
+        self.limitPerRefill = 1000  # Number of Kg per bag emptying
 
     def getNextResult(self):
         secondsPassed = (datetime.datetime.now() -

@@ -1,14 +1,10 @@
 import schedule
 import time
-from simulatedStorageSystemSensors.weightMaltFlourSiloSensor import weightMaltFlourSiloSensor
+from simulatedStorageSystemSensors.weightMaltFlourHopperSensor import weightMaltFlourHopperSensor
 from simulatedStorageSystemSensors.weightWheatFlourSiloSensor import weightWheatFlourSiloSensor
 
 # Send regular observations to the FROST server
 # Uses scheduler library: https://github.com/dbader/schedule
-
-# Initalise 'Weight - Wheat Flour Silo sensor'
-# Add to scheduler
-# Repeat for all other sensors
 
 sensorList = []
 
@@ -19,7 +15,7 @@ sensorList.append({
 })
 
 sensorList.append({
-    'sensor': weightMaltFlourSiloSensor('http://localhost:8080/FROST-Server/v1.0/', '2'),
+    'sensor': weightMaltFlourHopperSensor('http://localhost:8080/FROST-Server/v1.0/', '2'),
     'secondsBetweenReading': 2
 })
 
