@@ -1,5 +1,6 @@
 import schedule
 import time
+from simulatedStorageSystemSensors.weightMaltExtractTankSensor import weightMaltExtractTankSensor
 from simulatedStorageSystemSensors.weightStarchHopperSensor import weightStarchHopperSensor
 from simulatedStorageSystemSensors.weightMaltFlourHopperSensor import weightMaltFlourHopperSensor
 from simulatedStorageSystemSensors.weightWheatFlourSiloSensor import weightWheatFlourSiloSensor
@@ -23,6 +24,11 @@ sensorList.append({
 sensorList.append({
     'sensor': weightStarchHopperSensor('http://localhost:8080/FROST-Server/v1.0/', '3', False),
     'secondsBetweenReading': 1
+})
+
+sensorList.append({
+    'sensor': weightMaltExtractTankSensor('http://localhost:8080/FROST-Server/v1.0/', '4'),
+    'secondsBetweenReading': 5
 })
 
 for sensorSchedule in sensorList:
