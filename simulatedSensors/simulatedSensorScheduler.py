@@ -38,7 +38,7 @@ sensorList.append({
 
 # Inverted sugar sensor
 sensorList.append({
-    'sensor': weightInvertedSugarTankSensor('http://localhost:8080/FROST-Server/v1.0/', '5'),
+    'sensor': weightInvertedSugarTankSensor('http://localhost:8080/FROST-Server/v1.0/', '5', False),
     'secondsBetweenReading': 5
 })
 
