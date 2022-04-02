@@ -14,6 +14,11 @@
       "name": "Angular Frequency",
       "definition": "https://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AngularFrequency",
       "description": "The rate of rotation"
+    },
+    {
+      "name": "Temperature",
+      "definition": "https://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#ThermodynamicTemperature",
+      "description": "Thermodynamic Temperature"
     }
   ]
 }
