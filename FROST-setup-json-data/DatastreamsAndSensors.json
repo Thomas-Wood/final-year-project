@@ -109,6 +109,94 @@
       "Thing": {
         "@iot.id": 1
       }
+    },
+    {
+      "name": "Hz - Mixer",
+      "description": "The Hz of the mixing whisk motor",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Hertz",
+        "symbol": "Hz",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Hertz"
+      },
+      "Sensor": {
+        "name": "Hz - mixer sensor",
+        "description": "Hz sensor for Mixer",
+        "encodingType": "text/html",
+        "metadata": "https://www.frsky-rc.com/wp-content/uploads/2017/07/Manual/RPM.pdf"
+      },
+      "ObservedProperty": {
+        "@iot.id": 3
+      },
+      "Thing": {
+        "@iot.id": 2
+      }
+    },
+    {
+      "name": "Hz - Mixer Vessel",
+      "description": "The Hz of the mixing vessel motor",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Hertz",
+        "symbol": "Hz",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#Hertz"
+      },
+      "Sensor": {
+        "name": "Hz - mixer vessel sensor",
+        "description": "Hz sensor for Mixer vessel",
+        "encodingType": "text/html",
+        "metadata": "https://www.frsky-rc.com/wp-content/uploads/2017/07/Manual/RPM.pdf"
+      },
+      "ObservedProperty": {
+        "@iot.id": 3
+      },
+      "Thing": {
+        "@iot.id": 2
+      }
+    },
+    {
+      "name": "Temperature - Mixer",
+      "description": "The Temperature of the mixing whisk motor",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Celsius",
+        "symbol": "°C",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius"
+      },
+      "Sensor": {
+        "name": "Temperature - mixer sensor",
+        "description": "Temperature sensor for Mixer",
+        "encodingType": "text/html",
+        "metadata": "https://www.frsky-rc.com/wp-content/uploads/2017/07/Manual/RPM.pdf"
+      },
+      "ObservedProperty": {
+        "@iot.id": 4
+      },
+      "Thing": {
+        "@iot.id": 2
+      }
+    },
+    {
+      "name": "Temperature - Mixer Vessel",
+      "description": "The Temperature of the mixing vessel motor",
+      "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+      "unitOfMeasurement": {
+        "name": "Celsius",
+        "symbol": "°C",
+        "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius"
+      },
+      "Sensor": {
+        "name": "Temperature - mixer vessel sensor",
+        "description": "Temperature sensor for Mixer vessel motor",
+        "encodingType": "text/html",
+        "metadata": "https://www.frsky-rc.com/wp-content/uploads/2017/07/Manual/RPM.pdf"
+      },
+      "ObservedProperty": {
+        "@iot.id": 4
+      },
+      "Thing": {
+        "@iot.id": 2
+      }
     }
   ]
 }
