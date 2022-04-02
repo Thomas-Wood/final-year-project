@@ -7,6 +7,14 @@
       "Locations": [
         {"@iot.id": 1}
       ]
+    },
+    {
+      "name": "Mixing Machine",
+      "description": "The mixing machine in the malt loaf factory",
+      "properties": {},
+      "Locations": [
+        {"@iot.id": 1}
+      ]
     }
   ]
 }
