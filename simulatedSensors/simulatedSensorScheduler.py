@@ -1,6 +1,7 @@
 import schedule
 import time
 from simulatedMixingMachineSensors.HzMixerSensor import HzMixerSensor
+from simulatedMixingMachineSensors.HzVesselSensor import HzVesselSensor
 from simulatedStorageSystemSensors.weightInvertedSugarTankSensor import weightInvertedSugarTankSensor
 from simulatedStorageSystemSensors.weightMaltExtractTankSensor import weightMaltExtractTankSensor
 from simulatedStorageSystemSensors.weightStarchHopperSensor import weightStarchHopperSensor
@@ -46,6 +47,12 @@ sensorList.append({
 # Hz Mixer sensor
 sensorList.append({
     'sensor': HzMixerSensor('http://localhost:8080/FROST-Server/v1.0/', '6', False),
+    'secondsBetweenReading': 1
+})
+
+# Hz Vessel sensor
+sensorList.append({
+    'sensor': HzVesselSensor('http://localhost:8080/FROST-Server/v1.0/', '7', False),
     'secondsBetweenReading': 1
 })
 
