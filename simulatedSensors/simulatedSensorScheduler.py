@@ -1,5 +1,6 @@
 import schedule
 import time
+from simulatedMixingMachineSensors.HzMixerSensor import HzMixerSensor
 from simulatedStorageSystemSensors.weightInvertedSugarTankSensor import weightInvertedSugarTankSensor
 from simulatedStorageSystemSensors.weightMaltExtractTankSensor import weightMaltExtractTankSensor
 from simulatedStorageSystemSensors.weightStarchHopperSensor import weightStarchHopperSensor
@@ -40,6 +41,12 @@ sensorList.append({
 sensorList.append({
     'sensor': weightInvertedSugarTankSensor('http://localhost:8080/FROST-Server/v1.0/', '5', False),
     'secondsBetweenReading': 5
+})
+
+# Hz Mixer sensor
+sensorList.append({
+    'sensor': HzMixerSensor('http://localhost:8080/FROST-Server/v1.0/', '6', False),
+    'secondsBetweenReading': 1
 })
 
 for sensorSchedule in sensorList:
