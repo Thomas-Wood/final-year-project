@@ -64,6 +64,14 @@ Observation is the recording of a sensor's output. It has a result (the number i
 
 To clear the inputed data during testing, the volume created in docker must be deleted (Stopping the container doesn't clear it). This can be done through the UI or the CLI.
 
+To start the user interface, first start up the Flask server:
+
+    python FlaskServer/main.py
+
+Then view the interface at:
+
+    http://127.0.0.1:8080/
+
 ## Accessing raw FROST data
 
 You can access the data via a URL like this:
