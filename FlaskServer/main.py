@@ -14,6 +14,13 @@ def home():
     return render_template('selectServer.html')
 
 
+@app.route('/submitServerAddress', methods=['POST'])
+def submitServerAddress():
+    # Connect to the mongoDB server and retrieve any customisations
+
+    return render_template('dashboard.html')
+
+
 @app.errorhandler(500)
 def server_error(error):
     logging.exception('An error occurred during a request.')
