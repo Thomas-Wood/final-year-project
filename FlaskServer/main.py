@@ -18,6 +18,12 @@ def home():
 def submitServerAddress():
     # Connect to the mongoDB server and retrieve any customisations
 
+    # Connect to the FROST server and get all the Things and their Datastreams
+
+    # If any FROST entities are missing from MongoDB, add them with default settings
+
+    # Pass data to template to dynamically generate the checkboxes
+
     return render_template('dashboard.html')
 
 
