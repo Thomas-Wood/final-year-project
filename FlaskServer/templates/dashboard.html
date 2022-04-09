@@ -5,11 +5,13 @@
 <h2 class="background-primary">Welcome to the temp dashboard!</h2>
 
 {% for thing in thingsAndDatastreams %}
-<div class="row">
+<div class="row justify-content-center">
   <h2>Title for {{ thing['name'] }}</h2>
+</div>
+<div class="row justify-content-center">
   {% for datastream in thing['Datastreams'] %}
-  <div class="col">
-    <h3>{{ datastream['name'] }}</h3>
+  <div class="col-4">
+    <p>{{ datastream['name'] }}</p>
   </div>
   {% endfor %}
 </div>

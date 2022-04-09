@@ -23,8 +23,6 @@ def submitServerAddress():
     # Connect to the FROST server and get all the Things and their Datastreams that should be visible
     serverAddress = request.form['address']
 
-    print("serverAddress: " + serverAddress)
-
     thingsAndDatastreams = json.loads(bytes.decode(
         requests.get(serverAddress + '/Things?$expand=Datastreams').content))['value']
 
