@@ -1,4 +1,6 @@
 import logging
+import requests
+import json
 from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
@@ -18,13 +20,19 @@ def home():
 def submitServerAddress():
     # Connect to the mongoDB server and retrieve any customisations
 
-    # Connect to the FROST server and get all the Things and their Datastreams
+    # Connect to the FROST server and get all the Things and their Datastreams that should be visible
+    serverAddress = request.form['address']
+
+    print("serverAddress: " + serverAddress)
+
+    thingsAndDatastreams = json.loads(bytes.decode(
+        requests.get(serverAddress + '/Things?$expand=Datastreams').content))['value']
 
     # If any FROST entities are missing from MongoDB, add them with default settings
 
     # Pass data to template to dynamically generate the checkboxes
 
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', thingsAndDatastreams=thingsAndDatastreams)
 
 
 @app.errorhandler(500)
