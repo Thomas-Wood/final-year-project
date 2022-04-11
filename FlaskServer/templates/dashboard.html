@@ -4,6 +4,11 @@
 
 <h2 class="background-primary">Welcome to the temp dashboard!</h2>
 
+<div id="container" style="height: 500px"></div>
+<script language = "JavaScript">
+  $(document).ready(createChart('container'));
+</script>
+
 {% for thing in thingsAndDatastreams %}
 <div class="row justify-content-center">
   <h2>Title for {{ thing['name'] }}</h2>
@@ -12,6 +17,7 @@
   {% for datastream in thing['Datastreams'] %}
   <div class="col-4">
     <p>{{ datastream['name'] }}</p>
+    <p>Observation Link: {{ datastream['@iot.selfLink']}}/Observations</p>
   </div>
   {% endfor %}
 </div>
