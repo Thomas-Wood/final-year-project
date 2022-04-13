@@ -26,6 +26,13 @@ def submitServerAddress():
     thingsAndDatastreams = json.loads(bytes.decode(
         requests.get(serverAddress + '/Things?$expand=Datastreams').content))['value']
 
+    # Sort functions to sort Datastreams by ID
+    for thing in thingsAndDatastreams:
+        thing['Datastreams'].sort(key=lambda datastream: datastream['@iot.id'])
+
+    # Sort function to Things sort by ID
+    thingsAndDatastreams.sort(key=lambda thing: thing['@iot.id'])
+
     # If any FROST entities are missing from MongoDB, add them with default settings
 
     # Pass data to template to dynamically generate the checkboxes
