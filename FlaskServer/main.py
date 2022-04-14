@@ -1,6 +1,7 @@
 import logging
 import requests
 import json
+from pymongo import MongoClient
 from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
@@ -19,10 +20,9 @@ def home():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     # Connect to the mongoDB server and retrieve any customisations
+    # TODO
 
-    currentURL = request.url
-    endOfMainAddressIndex = currentURL.find('?')
-    addressParameters = currentURL[endOfMainAddressIndex:]
+    addressParameters = get_current_parameters()
 
     # Connect to the FROST server and get all the Things and their Datastreams that should be visible
     serverAddress = request.args.get('address')
@@ -37,8 +37,10 @@ def dashboard():
     thingsAndDatastreams.sort(key=lambda thing: thing['@iot.id'])
 
     # If any FROST entities are missing from MongoDB, add them with default settings
+    # TODO
 
     # Pass data to template to dynamically generate the checkboxes
+    # TODO
 
     return render_template('dashboard.html',
                            thingsAndDatastreams=thingsAndDatastreams,
@@ -52,19 +54,50 @@ def alerts():
 
 @app.route('/rules', methods=['GET'])
 def rules():
+
+    # Connect to MongoDB and get the rules for this server
+    client = MongoClient(
+        "mongodb+srv://AD-DB-User:%26h8Xt2Q%23V%26SG@cluster0.pglda.mongodb.net/SensorThingsDashboard")
+    serverAddress = request.args.get('address')
+    collectionName = 'Rules-' + serverAddress
+    db = client['SensorThingsDashboard'][collectionName]
+    myCursor = None
+    myCursor = db.find()
+    list_items = list(myCursor)
+    print("Items currently in DB: " + str(list_items))
+
+    # Test data
+    rule = {
+        # The data from the sensor (mostRecent, mean1m, mean5m, mean1h etc)
+        "dataForm": "mostRecent",
+        "DataStreamID": "1",
+        "comparator": "lessThan",
+        "limit": "5000"
+    }
+    # result = db.insert_one(rule)
+    # print("Created object with ID: " + str(result.inserted_id))
+
     return "Not yet created"
 
 
 @app.errorhandler(500)
 def server_error(error):
     logging.exception('An error occurred during a request.')
-    return 'An internal error occurred.', 500
+    return render_template('error.html', errorCode=500), 500
 
 
 @app.errorhandler(404)
 def page_not_found(error):
     logging.warning('Missing page requested')
-    return render_template('404.html'), 404
+    return render_template('error.html', errorCode=404), 404
+
+
+def get_current_parameters():
+    currentURL = request.url
+    endOfMainAddressIndex = currentURL.find('?')
+    addressParameters = currentURL[endOfMainAddressIndex:]
+
+    return addressParameters
 
 
 if __name__ == '__main__':
