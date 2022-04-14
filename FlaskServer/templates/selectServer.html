@@ -4,7 +4,7 @@
 
 <h2 class="background-primary centred">Factory Monitoring Dashboard</h2>
 
-<form method="post" action="{{ url_for('submitServerAddress') }}" enctype="multipart/form-data" style="padding: 30px">
+<form method="get" action="{{ url_for('dashboard') }}" enctype="multipart/form-data" style="padding: 30px">
     <div class="form-group">
         <label class="centred" for="address">Address</label>
         <input type="text" name="address" class="form-control centred" value="http://localhost:8080/FROST-Server/v1.0" required>

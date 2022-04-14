@@ -16,21 +16,20 @@ def home():
     return render_template('selectServer.html')
 
 
-@app.route('/submitServerAddress', methods=['POST'])
-def submitServerAddress():
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
     # Connect to the mongoDB server and retrieve any customisations
 
     # Connect to the FROST server and get all the Things and their Datastreams that should be visible
-    serverAddress = request.form['address']
-
+    serverAddress = request.args.get('address')
     thingsAndDatastreams = json.loads(bytes.decode(
         requests.get(serverAddress + '/Things?$expand=Datastreams').content))['value']
 
-    # Sort functions to sort Datastreams by ID
+    # Sort Datastreams by ID
     for thing in thingsAndDatastreams:
         thing['Datastreams'].sort(key=lambda datastream: datastream['@iot.id'])
 
-    # Sort function to Things sort by ID
+    # Sort Things by ID
     thingsAndDatastreams.sort(key=lambda thing: thing['@iot.id'])
 
     # If any FROST entities are missing from MongoDB, add them with default settings
