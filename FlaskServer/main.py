@@ -20,6 +20,10 @@ def home():
 def dashboard():
     # Connect to the mongoDB server and retrieve any customisations
 
+    currentURL = request.url
+    endOfMainAddressIndex = currentURL.find('?')
+    addressParameters = currentURL[endOfMainAddressIndex:]
+
     # Connect to the FROST server and get all the Things and their Datastreams that should be visible
     serverAddress = request.args.get('address')
     thingsAndDatastreams = json.loads(bytes.decode(
@@ -36,7 +40,19 @@ def dashboard():
 
     # Pass data to template to dynamically generate the checkboxes
 
-    return render_template('dashboard.html', thingsAndDatastreams=thingsAndDatastreams)
+    return render_template('dashboard.html',
+                           thingsAndDatastreams=thingsAndDatastreams,
+                           addressParameters=addressParameters)
+
+
+@app.route('/alerts', methods=['GET'])
+def alerts():
+    return "Not yet created"
+
+
+@app.route('/rules', methods=['GET'])
+def rules():
+    return "Not yet created"
 
 
 @app.errorhandler(500)

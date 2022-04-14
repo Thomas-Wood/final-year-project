@@ -12,7 +12,6 @@
   {% for datastream in thing['Datastreams'] %}
   <div class="col-4">
     <p>{{ datastream['name'] }}</p>
-    <p>Observation Link: {{ datastream['@iot.selfLink']}}/Observations?$top=100&$orderby=phenomenonTime desc</p>
     <div id="{{ datastream['@iot.id'] }}"></div>
     <script language = "JavaScript">
       $(document).ready(createChartObject("{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink']}}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
