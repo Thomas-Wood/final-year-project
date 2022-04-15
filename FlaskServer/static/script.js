@@ -84,3 +84,22 @@ function setDataStreamName(dataStreamID, serverAddress, containerID) {
     document.getElementById(containerID).innerHTML = results["name"]
   }) 
 }
+
+function setDataStreamOptions(serverAddress, containerID) {
+  queryAddress = serverAddress + "/Datastreams"
+  $.getJSON(queryAddress, function(results) {
+
+    dataStreams = results['value']
+    dataStreams.sort(function(a, b) {
+      return parseInt(a['@iot.id']) - parseInt(b['@iot.id'])
+    })
+
+    optionTags = ""
+    for (let i=0; i<dataStreams.length; i++) {
+      console.log(optionTags)
+      optionTags = optionTags + "<option>" + dataStreams[i]['@iot.id'] + " - " + dataStreams[i]['name'] + "</option>"
+    }
+    
+    document.getElementById(containerID).innerHTML = optionTags
+  }) 
+}

@@ -19,9 +19,13 @@
       <h4 class="text-center">From</h4>
     </div>
     <div class="col">
-      <select class="form-select" name="dataStream">
-        <option>1 - Weight - Wheat Flour Silo</option>
-        <option>2 - Weight - Malt FLour Silo</option>
+      <select class="form-select" name="dataStream" id="dataStreamOptions">
+        <option>Loading DataStreams...</option>
+        <script language = "JavaScript">
+          $(document).ready(function() {
+            setDataStreamOptions("{{ serverAddress }}", "dataStreamOptions")
+          });
+        </script>
       </select>
     </div>
     <div class="col-1">
