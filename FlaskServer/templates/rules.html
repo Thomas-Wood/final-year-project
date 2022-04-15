@@ -4,6 +4,47 @@
 
 <h2 class="background-primary">Welcome to the rules page!</h2>
 
+<h3>Create New Rule</h3>
+<form method="post" action="{{ url_for('add_rule') }}{{ addressParameters }}" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col">
+      <select class="form-select" name="dataForm">
+        <option>Most Recent Value</option>
+        <option>1 hour Average</option>
+        <option>5 min Average</option>
+        <option>1 min Average</option>
+      </select>
+    </div>
+    <div class="col-1">
+      <h4 class="text-center">From</h4>
+    </div>
+    <div class="col">
+      <select class="form-select" name="dataStream">
+        <option>1 - Weight - Wheat Flour Silo</option>
+        <option>2 - Weight - Malt FLour Silo</option>
+      </select>
+    </div>
+    <div class="col-1">
+      <h4 class="text-center">Is</h4>
+    </div>
+    <div class="col">
+      <select class="form-select" name="comparator">
+        <option>lessThan</option>
+        <option>moreThan</option>
+      </select>
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" placeholder="5000" name="limit">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center" style="padding: 20px">
+      <button type="submit" class="btn btn-success">Create Rule</button>
+    </div>
+  </div>
+</form>
+
+<h3>Current Rules</h3>
 <table class="table">
   <thead>
     <tr>

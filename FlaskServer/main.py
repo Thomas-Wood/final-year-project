@@ -84,6 +84,19 @@ def rules():
     return render_template('rules.html', rules=rules, addressParameters=addressParameters, serverAddress=serverAddress)
 
 
+@app.route('/add_rule', methods=['POST'])
+def add_rule():
+
+    serverAddress = request.args.get('address')
+
+    print(request.form['dataForm'])
+    print(request.form['dataStream'])
+    print(request.form['comparator'])
+    print(request.form['limit'])
+
+    return redirect(url_for('rules', address=serverAddress), 301)
+
+
 @app.errorhandler(500)
 def server_error(error):
     logging.exception('An error occurred during a request.')
