@@ -81,7 +81,7 @@ def rules():
     # result = db.insert_one(rule)
     # print("Created object with ID: " + str(result.inserted_id))
 
-    return render_template('rules.html', rules=rules, addressParameters=addressParameters)
+    return render_template('rules.html', rules=rules, addressParameters=addressParameters, serverAddress=serverAddress)
 
 
 @app.errorhandler(500)

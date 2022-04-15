@@ -56,6 +56,31 @@ function createChartObject(chartID, observationUrl, name, unitSymbol, unitName) 
   });
 }
 
-function calculateState() {
-  return "function working!"
+function calculateState(operand1, comparator, operand2) {
+  if (comparator="lessThan") {
+    return operand1 < operand2
+  } else if (comparator="moreThan") {
+    return operand1 > operand2
+  } else {
+    return "Error in comparator name"
+  }
+}
+
+function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverAddress, containerID) {
+  if (dataForm == "mostRecent") {
+    queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$top=1&$orderby=phenomenonTime desc"
+    $.getJSON(queryAddress, function(results) {
+      observationResult = parseFloat(results["result"])
+      state = calculateState(observationResult, comparator, parseFloat(limit))
+
+      document.getElementById(containerID).innerHTML = state
+    })
+  }
+}
+
+function setDataStreamName(dataStreamID, serverAddress, containerID) {
+  queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")"
+  $.getJSON(queryAddress, function(results) {
+    document.getElementById(containerID).innerHTML = results["name"]
+  }) 
 }
