@@ -49,11 +49,16 @@ def dashboard():
 
 @app.route('/alerts', methods=['GET'])
 def alerts():
+
+    addressParameters = get_current_parameters()
+
     return "Not yet created"
 
 
 @app.route('/rules', methods=['GET'])
 def rules():
+
+    addressParameters = get_current_parameters()
 
     # Connect to MongoDB and get the rules for this server
     client = MongoClient(
@@ -63,21 +68,20 @@ def rules():
     db = client['SensorThingsDashboard'][collectionName]
     myCursor = None
     myCursor = db.find()
-    list_items = list(myCursor)
-    print("Items currently in DB: " + str(list_items))
+    rules = list(myCursor)
 
     # Test data
     rule = {
         # The data from the sensor (mostRecent, mean1m, mean5m, mean1h etc)
         "dataForm": "mostRecent",
-        "DataStreamID": "1",
+        "dataStreamID": "1",
         "comparator": "lessThan",
         "limit": "5000"
     }
     # result = db.insert_one(rule)
     # print("Created object with ID: " + str(result.inserted_id))
 
-    return "Not yet created"
+    return render_template('rules.html', rules=rules, addressParameters=addressParameters)
 
 
 @app.errorhandler(500)

@@ -55,3 +55,7 @@ function createChartObject(chartID, observationUrl, name, unitSymbol, unitName) 
 
   });
 }
+
+function calculateState() {
+  return "function working!"
+}

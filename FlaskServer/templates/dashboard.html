@@ -14,7 +14,7 @@
     <p>{{ datastream['name'] }}</p>
     <div id="{{ datastream['@iot.id'] }}"></div>
     <script language = "JavaScript">
-      $(document).ready(createChartObject("{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink']}}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
+      $(document).ready(createChartObject("{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
     </script>
   </div>
   {% endfor %}

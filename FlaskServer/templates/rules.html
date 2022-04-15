@@ -1,0 +1,34 @@
+{% extends "baseAndNavbar.html" %}
+
+{% block content %}
+
+<h2 class="background-primary">Welcome to the rules page!</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Data Form</th>
+      <th scope="col">DataStream</th>
+      <th scope="col">Comparator</th>
+      <th scope="col">Limit</th>
+      <th scope="col">Current State</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rule in rules %}
+      <td>{{ rule['dataForm'] }}</td>
+      <td>{{ rule['dataStreamID'] }}</td>
+      <td>{{ rule['comparator'] }}</td>
+      <td>{{ rule['limit'] }}</td>
+      <td id="{{ rule['_id'] }}">Calculating state...</td>
+      <script language = "JavaScript">
+        $(document).ready(function() {
+          var state = calculateState("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}")
+          document.getElementById("{{ rule['_id'] }}").innerHTML = state
+        });
+      </script>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
