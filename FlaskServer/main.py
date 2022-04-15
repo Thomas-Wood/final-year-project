@@ -70,17 +70,6 @@ def rules():
     myCursor = db.find()
     rules = list(myCursor)
 
-    # Test data
-    rule = {
-        # The data from the sensor (mostRecent, mean1m, mean5m, mean1h etc)
-        "dataForm": "mostRecent",
-        "dataStreamID": "1",
-        "comparator": "lessThan",
-        "limit": "5000"
-    }
-    # result = db.insert_one(rule)
-    # print("Created object with ID: " + str(result.inserted_id))
-
     return render_template('rules.html', rules=rules, addressParameters=addressParameters, serverAddress=serverAddress)
 
 
@@ -89,10 +78,20 @@ def add_rule():
 
     serverAddress = request.args.get('address')
 
-    print(request.form['dataForm'])
-    print(request.form['dataStream'])
-    print(request.form['comparator'])
-    print(request.form['limit'])
+    # Connect to MongoDB and get the rules for this server
+    client = MongoClient(
+        "mongodb+srv://AD-DB-User:%26h8Xt2Q%23V%26SG@cluster0.pglda.mongodb.net/SensorThingsDashboard")
+    collectionName = 'Rules-' + serverAddress
+    db = client['SensorThingsDashboard'][collectionName]
+
+    rule = {
+        "dataForm": request.form['dataForm'],
+        "dataStreamID": request.form['dataStream'][0],
+        "comparator": request.form['comparator'],
+        "limit": request.form['limit']
+    }
+    result = db.insert_one(rule)
+    print("Created object with ID: " + str(result.inserted_id))
 
     return redirect(url_for('rules', address=serverAddress), 301)
 

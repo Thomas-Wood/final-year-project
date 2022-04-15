@@ -61,21 +61,23 @@
   </thead>
   <tbody>
     {% for rule in rules %}
-      <td>{{ rule['dataForm'] }}</td>
-      <td id="datastream-{{ rule['_id'] }}">{{ rule['dataStreamID'] }}</td>
-        <script language = "JavaScript">
-          $(document).ready(function() {
-            setDataStreamName("{{ rule['dataStreamID'] }}", "{{ serverAddress }}", "datastream-{{ rule['_id'] }}")
-          });
-        </script>
-      <td>{{ rule['comparator'] }}</td>
-      <td>{{ rule['limit'] }}</td>
-      <td id="state-{{ rule['_id'] }}">Calculating state...</td>
-        <script language = "JavaScript">
-          $(document).ready(function() {
-            setAndcalculateState("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
-          });
-        </script>
+      <tr>
+        <td>{{ rule['dataForm'] }}</td>
+        <td id="datastream-{{ rule['_id'] }}">{{ rule['dataStreamID'] }}</td>
+          <script language = "JavaScript">
+            $(document).ready(function() {
+              setDataStreamName("{{ rule['dataStreamID'] }}", "{{ serverAddress }}", "datastream-{{ rule['_id'] }}")
+            });
+          </script>
+        <td>{{ rule['comparator'] }}</td>
+        <td>{{ rule['limit'] }}</td>
+        <td id="state-{{ rule['_id'] }}">Calculating state...</td>
+          <script language = "JavaScript">
+            $(document).ready(function() {
+              setAndcalculateState("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
+            });
+          </script>
+      </tr>
     {% endfor %}
   </tbody>
 </table>

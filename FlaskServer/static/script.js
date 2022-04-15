@@ -96,7 +96,6 @@ function setDataStreamOptions(serverAddress, containerID) {
 
     optionTags = ""
     for (let i=0; i<dataStreams.length; i++) {
-      console.log(optionTags)
       optionTags = optionTags + "<option>" + dataStreams[i]['@iot.id'] + " - " + dataStreams[i]['name'] + "</option>"
     }
     
