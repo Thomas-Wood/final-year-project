@@ -76,32 +76,57 @@ function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverA
       document.getElementById(containerID).innerHTML = state
     })
   } else if (dataForm == "1 min Average") {
-    let UTCStamp = new Date().getTime();
-    let millesecondsToSubtract = 1000 * 60
-    let timeZoneOffset = new Date().getTimezoneOffset()*60*1000
-    let getResultsFromDate = new Date(UTCStamp - millesecondsToSubtract - timeZoneOffset)
 
-    resultsFromTime = getResultsFromDate.toISOString()
+    let millesecondsToSubtract = 1000 * 60 // Totals 1 min
+    resultsFromTime = getDateWithOffset(millesecondsToSubtract)
 
     queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$orderby=phenomenonTime desc&$filter=phenomenonTime ge " + resultsFromTime
-    $.getJSON(queryAddress, function(results) {
+    state = getResultsAndAverageState(queryAddress, comparator, limit, containerID)
+  } else if (dataForm == "5 min Average") {
 
-      numberOfObservations = results['value'].length
+    let millesecondsToSubtract = 1000 * 60 * 5 // Totals 5 mins
+    resultsFromTime = getDateWithOffset(millesecondsToSubtract)
 
-      if (numberOfObservations == 0) {
-        state = "No Data"
-      } else {
-        runningTotal = 0
-        for (let i=0; i<numberOfObservations; i++) {
-          runningTotal += results['value'][i]['result']
-        }
-        mean = runningTotal / numberOfObservations
-        state = calculateState(mean, comparator, parseFloat(limit))
-      }
+    queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$orderby=phenomenonTime desc&$filter=phenomenonTime ge " + resultsFromTime
+    state = getResultsAndAverageState(queryAddress, comparator, limit, containerID)
+  } else if (dataForm == "1 hour Average") {
+    
+    let millesecondsToSubtract = 1000 * 60 * 60 // Totals 60 mins
+    resultsFromTime = getDateWithOffset(millesecondsToSubtract)
 
-      document.getElementById(containerID).innerHTML = state
-    })
+    queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$orderby=phenomenonTime desc&$filter=phenomenonTime ge " + resultsFromTime
+    state = getResultsAndAverageState(queryAddress, comparator, limit, containerID)
   }
+}
+
+function getResultsAndAverageState(queryAddress, comparator, limit, containerID) {
+  $.getJSON(queryAddress, function(results) {
+    numberOfObservations = results['value'].length
+
+    // TODO Add loops for when observations are over 100 (i.e. another request is needed for the next set of results)
+    if (numberOfObservations == 100) {
+      console.log("Warning: Number of observations maxed, not using full data set")
+    }
+    
+    if (numberOfObservations == 0) {
+      state = "No Data"
+    } else {
+      runningTotal = 0
+      for (let i=0; i<numberOfObservations; i++) {
+        runningTotal += results['value'][i]['result']
+      }
+      mean = runningTotal / numberOfObservations
+      state = calculateState(mean, comparator, parseFloat(limit))
+    }
+    document.getElementById(containerID).innerHTML = state
+  })
+}
+
+function getDateWithOffset(millesecondsToSubtract) {
+  let UTCStamp = new Date().getTime()
+  let timeZoneOffset = new Date().getTimezoneOffset()*60*1000
+  let getResultsFromDate = new Date(UTCStamp - millesecondsToSubtract - timeZoneOffset)
+  return getResultsFromDate.toISOString()
 }
 
 function setDataStreamName(dataStreamID, serverAddress, containerID) {
