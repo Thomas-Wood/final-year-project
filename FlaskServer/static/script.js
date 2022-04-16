@@ -66,6 +66,13 @@ function calculateState(operand1, comparator, operand2) {
   }
 }
 
+function refreshStatesLoop(dataForm, dataStreamID, comparator, limit, serverAddress, containerID) {
+  setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverAddress, containerID)
+  setInterval(function () {
+    setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverAddress, containerID)
+  }, 5000);
+}
+
 function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverAddress, containerID) {
   if (dataForm == "Most Recent Value") {
     queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$top=1&$orderby=phenomenonTime desc"
@@ -105,9 +112,9 @@ function getResultsAndAverageState(queryAddress, comparator, limit, containerID)
 
     // TODO Add loops for when observations are over 100 (i.e. another request is needed for the next set of results)
     if (numberOfObservations == 100) {
-      console.log("Warning: Number of observations maxed, not using full data set")
+      console.warn("Warning: Number of observations per request maxed, not using full data set")
     }
-    
+
     if (numberOfObservations == 0) {
       state = "No Data"
     } else {

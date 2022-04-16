@@ -75,7 +75,7 @@
         <td id="state-{{ rule['_id'] }}">Calculating state...</td>
           <script language = "JavaScript">
             $(document).ready(function() {
-              setAndcalculateState("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
+              refreshStatesLoop("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
             });
           </script>
         <td>
