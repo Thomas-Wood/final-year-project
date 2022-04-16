@@ -57,9 +57,9 @@ function createChartObject(chartID, observationUrl, name, unitSymbol, unitName) 
 }
 
 function calculateState(operand1, comparator, operand2) {
-  if (comparator="lessThan") {
+  if (comparator="Less Than") {
     return operand1 < operand2
-  } else if (comparator="moreThan") {
+  } else if (comparator="More Than") {
     return operand1 > operand2
   } else {
     return "Error in comparator name"
@@ -67,7 +67,7 @@ function calculateState(operand1, comparator, operand2) {
 }
 
 function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverAddress, containerID) {
-  if (dataForm == "mostRecent") {
+  if (dataForm == "Most Recent Value") {
     queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$top=1&$orderby=phenomenonTime desc"
     $.getJSON(queryAddress, function(results) {
       observationResult = parseFloat(results["result"])
@@ -75,6 +75,8 @@ function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverA
 
       document.getElementById(containerID).innerHTML = state
     })
+  } else if (dataForm == "1 min Average") {
+
   }
 }
 

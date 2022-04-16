@@ -90,8 +90,7 @@ def add_rule():
         "comparator": request.form['comparator'],
         "limit": request.form['limit']
     }
-    result = db.insert_one(rule)
-    print("Created object with ID: " + str(result.inserted_id))
+    db.insert_one(rule)
 
     return redirect(url_for('rules', address=serverAddress), 301)
 
