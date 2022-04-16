@@ -2,6 +2,7 @@ import logging
 import requests
 import json
 from pymongo import MongoClient
+from bson import ObjectId
 from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
@@ -91,6 +92,24 @@ def add_rule():
         "limit": request.form['limit']
     }
     db.insert_one(rule)
+
+    return redirect(url_for('rules', address=serverAddress), 301)
+
+
+@app.route('/delete_rule', methods=['POST'])
+def delete_rule():
+
+    serverAddress = request.args.get('address')
+
+    # Connect to MongoDB and get the rules for this server
+    client = MongoClient(
+        "mongodb+srv://AD-DB-User:%26h8Xt2Q%23V%26SG@cluster0.pglda.mongodb.net/SensorThingsDashboard")
+    collectionName = 'Rules-' + serverAddress
+    db = client['SensorThingsDashboard'][collectionName]
+
+    # Search for rule and delete it
+    myquery = {"_id": ObjectId(request.form['ruleID'])}
+    db.delete_one(myquery)
 
     return redirect(url_for('rules', address=serverAddress), 301)
 
