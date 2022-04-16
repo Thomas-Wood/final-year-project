@@ -57,9 +57,9 @@ function createChartObject(chartID, observationUrl, name, unitSymbol, unitName) 
 }
 
 function calculateState(operand1, comparator, operand2) {
-  if (comparator="Less Than") {
+  if (comparator=="Less Than") {
     return operand1 < operand2
-  } else if (comparator="More Than") {
+  } else if (comparator=="More Than") {
     return operand1 > operand2
   } else {
     return "Error in comparator name"
@@ -76,7 +76,31 @@ function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverA
       document.getElementById(containerID).innerHTML = state
     })
   } else if (dataForm == "1 min Average") {
+    let UTCStamp = new Date().getTime();
+    let millesecondsToSubtract = 1000 * 60
+    let timeZoneOffset = new Date().getTimezoneOffset()*60*1000
+    let getResultsFromDate = new Date(UTCStamp - millesecondsToSubtract - timeZoneOffset)
 
+    resultsFromTime = getResultsFromDate.toISOString()
+
+    queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$orderby=phenomenonTime desc&$filter=phenomenonTime ge " + resultsFromTime
+    $.getJSON(queryAddress, function(results) {
+
+      numberOfObservations = results['value'].length
+
+      if (numberOfObservations == 0) {
+        state = "No Data"
+      } else {
+        runningTotal = 0
+        for (let i=0; i<numberOfObservations; i++) {
+          runningTotal += results['value'][i]['result']
+        }
+        mean = runningTotal / numberOfObservations
+        state = calculateState(mean, comparator, parseFloat(limit))
+      }
+
+      document.getElementById(containerID).innerHTML = state
+    })
   }
 }
 
