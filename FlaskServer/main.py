@@ -53,7 +53,9 @@ def alerts():
 
     addressParameters = get_current_parameters()
 
-    return "Not yet created"
+    alerts = []
+
+    return render_template('alerts.html', alerts=alerts, addressParameters=addressParameters)
 
 
 @app.route('/rules', methods=['GET'])
