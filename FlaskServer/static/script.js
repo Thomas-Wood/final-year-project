@@ -106,23 +106,36 @@ function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverA
   }
 }
 
-function getResultsAndAverageState(queryAddress, comparator, limit, containerID) {
-  $.getJSON(queryAddress, function(results) {
-    numberOfObservations = results['value'].length
+async function getAllValues(queryAddress) {
+  const response = await fetch(queryAddress)
+  var results = await response.json();
 
-    // TODO Add loops for when observations are over 100 (i.e. another request is needed for the next set of results)
-    if (numberOfObservations == 100) {
-      console.warn("Warning: Number of observations per request maxed, not using full data set")
-    }
+  var resultsList = []
+  if (results['@iot.nextLink'] != undefined) {
+    resultsList = await getAllValues(results['@iot.nextLink'])
+  }
+
+  numberOfObservations = results['value'].length
+  for (let i=0; i<numberOfObservations; i++) {
+    resultsList.push(results['value'][i]['result'])
+  }
+
+  return resultsList
+}
+
+function getResultsAndAverageState(queryAddress, comparator, limit, containerID) {
+  $.getJSON(queryAddress, async function(results) {
+    numberOfObservations = results['value'].length
 
     if (numberOfObservations == 0) {
       state = "No Data"
     } else {
+      fullList = await getAllValues(queryAddress) // Get any extra results from nextLink
       runningTotal = 0
-      for (let i=0; i<numberOfObservations; i++) {
-        runningTotal += results['value'][i]['result']
+      for (let i=0; i<fullList.length; i++) {
+        runningTotal += fullList[i]
       }
-      mean = runningTotal / numberOfObservations
+      mean = runningTotal / fullList.length
       state = calculateState(mean, comparator, parseFloat(limit))
     }
     document.getElementById(containerID).innerHTML = state
