@@ -89,7 +89,8 @@ def add_rule():
         "dataForm": request.form['dataForm'],
         "dataStreamID": request.form['dataStream'][0],
         "comparator": request.form['comparator'],
-        "limit": request.form['limit']
+        "limit": request.form['limit'],
+        "severity": request.form['severity']
     }
     db.insert_one(rule)
 
