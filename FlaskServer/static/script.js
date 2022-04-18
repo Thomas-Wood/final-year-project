@@ -77,7 +77,7 @@ function setAndcalculateState(dataForm, dataStreamID, comparator, limit, serverA
   if (dataForm == "Most Recent Value") {
     queryAddress = serverAddress + "/Datastreams" + "(" + dataStreamID + ")" + "/Observations?$top=1&$orderby=phenomenonTime desc"
     $.getJSON(queryAddress, function(results) {
-      observationResult = parseFloat(results["result"])
+      observationResult = parseFloat(results['value'][0]["result"])
       state = calculateState(observationResult, comparator, parseFloat(limit))
 
       document.getElementById(containerID).innerHTML = state
