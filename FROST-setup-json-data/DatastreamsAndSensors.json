@@ -160,7 +160,7 @@
       "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
       "unitOfMeasurement": {
         "name": "Celsius",
-        "symbol": "°C",
+        "symbol": "C",
         "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius"
       },
       "Sensor": {
@@ -182,7 +182,7 @@
       "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
       "unitOfMeasurement": {
         "name": "Celsius",
-        "symbol": "°C",
+        "symbol": "C",
         "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius"
       },
       "Sensor": {

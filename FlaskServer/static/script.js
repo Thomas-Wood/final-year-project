@@ -56,6 +56,21 @@ function createChartObject(chartID, observationUrl, name, unitSymbol, unitName) 
   });
 }
 
+function getCurrentValueLoop(elementID, observationUrl, unitSymbol) {
+  getAndSetCurrentValue(elementID, observationUrl, unitSymbol)
+  setInterval(function () {
+    getAndSetCurrentValue(elementID, observationUrl, unitSymbol)
+  }, 3000);
+}
+
+function getAndSetCurrentValue(elementID, observationUrl, unitSymbol) {
+  $.getJSON(observationUrl, function(observations) {
+    var value = parseFloat(observations['value'][0]['result']).toFixed(2)
+
+    document.getElementById(elementID).innerHTML = value + " " + unitSymbol
+  });
+}
+
 function calculateState(operand1, comparator, operand2) {
   if (comparator=="Less Than") {
     return operand1 < operand2
