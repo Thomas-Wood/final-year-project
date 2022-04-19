@@ -71,6 +71,21 @@ function getAndSetCurrentValue(elementID, observationUrl, unitSymbol) {
   });
 }
 
+function toggleVisibleGraphs(datastreamID) {
+  var x = document.getElementById("chart-" + datastreamID);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  var x = document.getElementById("currentValueContainer-" + datastreamID);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
 function calculateState(operand1, comparator, operand2) {
   if (comparator=="Less Than") {
     return operand1 < operand2

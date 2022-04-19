@@ -17,16 +17,23 @@
       {% for datastream in thing['Datastreams'] %}
       <div class="col-4">
         <div class="graphOuterContainer background-primary">
+
+          {% set currentDatastreamID = datastream['@iot.id'] %}
+          <button type="button" style="margin-bottom: 5px;" class="btn btn-primary centred" onclick='toggleVisibleGraphs("{{currentDatastreamID}}")'> Toggle Graph / Current Value</button>
+
           <div id="chart-{{ datastream['@iot.id'] }}"></div>
           <script language = "JavaScript">
             $(document).ready(createChartObject("chart-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
           </script>
-          <div>
+
+          <div id="currentValueContainer-{{ datastream['@iot.id'] }}" style="display: None">
+            <h4 class="centred">{{ datastream['name'] }}</h4>
             <h4 id="currentValue-{{ datastream['@iot.id'] }}" class="centred">Loading Current Value...</h4>
             <script language = "JavaScript">
               $(document).ready(getCurrentValueLoop("currentValue-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=1&$orderby=phenomenonTime desc", "{{ datastream['unitOfMeasurement']['symbol'] }}"));
             </script>
           </div>
+
         </div>
       </div>
       {% endfor %}
