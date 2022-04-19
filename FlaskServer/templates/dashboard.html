@@ -7,26 +7,30 @@
 
 {% for thing in thingsAndDatastreams %}
 <div class="thingBorder card-primary">
-  <div class="row justify-content-center">
-    <h2 class="centred">{{ thing['name'] }}</h2>
+  <div class="row justify-content-center thingHeader">
+    <button data-bs-toggle="collapse" data-bs-target="#thing-{{thing['@iot.id']}}" type="button" class="btn btn-info">
+      <h2 class="centred">{{ thing['name'] }}</h2>
+    </button>
   </div>
-  <div class="row justify-content-center">
-    {% for datastream in thing['Datastreams'] %}
-    <div class="col-4">
-      <div class="graphOuterContainer background-primary">
-        <div id="chart-{{ datastream['@iot.id'] }}"></div>
-        <script language = "JavaScript">
-          $(document).ready(createChartObject("chart-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
-        </script>
-        <div>
-          <h4 id="currentValue-{{ datastream['@iot.id'] }}" class="centred">Loading Current Value...</h4>
+  <div id="thing-{{thing['@iot.id']}}" class="collapse show">
+    <div class="row justify-content-center">
+      {% for datastream in thing['Datastreams'] %}
+      <div class="col-4">
+        <div class="graphOuterContainer background-primary">
+          <div id="chart-{{ datastream['@iot.id'] }}"></div>
           <script language = "JavaScript">
-            $(document).ready(getCurrentValueLoop("currentValue-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=1&$orderby=phenomenonTime desc", "{{ datastream['unitOfMeasurement']['symbol'] }}"));
+            $(document).ready(createChartObject("chart-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
           </script>
+          <div>
+            <h4 id="currentValue-{{ datastream['@iot.id'] }}" class="centred">Loading Current Value...</h4>
+            <script language = "JavaScript">
+              $(document).ready(getCurrentValueLoop("currentValue-{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=1&$orderby=phenomenonTime desc", "{{ datastream['unitOfMeasurement']['symbol'] }}"));
+            </script>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 {% endfor %}
