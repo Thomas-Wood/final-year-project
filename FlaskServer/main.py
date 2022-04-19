@@ -67,8 +67,8 @@ def alerts():
     # Sort Alerts by Date
     alerts.sort(key=lambda alert: alert['endTime'], reverse=True)
 
-    # Select only 100 most recent alerts
-    alerts = alerts[:100]
+    # Select only 50 most recent alerts
+    alerts = alerts[:50]
 
     for alert in alerts:
         # Get the name of the datastream
