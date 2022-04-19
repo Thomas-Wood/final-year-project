@@ -7,6 +7,10 @@ html {
   background-color: #c9d1ff;
 }
 
+.card-primary {
+  background-color: #afbbff;
+}
+
 .centred {
   display: grid;
   margin: auto;
@@ -15,4 +19,16 @@ html {
 
 td {
   border-radius: 15px;
+}
+
+.graphOuterContainer {
+  margin: 10px;
+  padding: 10px;
+}
+
+.thingBorder {
+  border-style: solid;
+  border-radius: 50px;
+  border-color: black;
+  margin: 10px;
 }

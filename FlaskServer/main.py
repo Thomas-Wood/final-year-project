@@ -38,7 +38,8 @@ def dashboard():
 
     return render_template('dashboard.html',
                            thingsAndDatastreams=thingsAndDatastreams,
-                           addressParameters=addressParameters)
+                           addressParameters=addressParameters,
+                           serverAddress=serverAddress)
 
 
 @app.route('/alerts', methods=['GET'])

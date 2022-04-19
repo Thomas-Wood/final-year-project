@@ -2,22 +2,26 @@
 
 {% block content %}
 
-<h2 class="background-primary">Welcome to the temp dashboard!</h2>
+<h1 class="centred">Sensor Dashboard</h1>
+<p class="centred">{{ serverAddress }}</p>
 
 {% for thing in thingsAndDatastreams %}
-<div class="row justify-content-center">
-  <h2>Title for {{ thing['name'] }}</h2>
-</div>
-<div class="row justify-content-center">
-  {% for datastream in thing['Datastreams'] %}
-  <div class="col-4">
-    <p>{{ datastream['name'] }}</p>
-    <div id="{{ datastream['@iot.id'] }}"></div>
-    <script language = "JavaScript">
-      $(document).ready(createChartObject("{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
-    </script>
+<div class="thingBorder card-primary">
+  <div class="row justify-content-center">
+    <h2 class="centred">{{ thing['name'] }}</h2>
   </div>
-  {% endfor %}
+  <div class="row justify-content-center">
+    {% for datastream in thing['Datastreams'] %}
+    <div class="col-4">
+      <div class="graphOuterContainer background-primary">
+        <div id="{{ datastream['@iot.id'] }}"></div>
+        <script language = "JavaScript">
+          $(document).ready(createChartObject("{{ datastream['@iot.id'] }}", "{{ datastream['@iot.selfLink'] }}/Observations?$top=100&$orderby=phenomenonTime desc", "{{ datastream['name'] }}", "{{ datastream['unitOfMeasurement']['symbol'] }}", "{{ datastream['unitOfMeasurement']['name'] }}" ));
+        </script>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endfor %}
 
