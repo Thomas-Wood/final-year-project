@@ -1,11 +1,9 @@
 import json
-from operator import truediv
 import time
 import requests
 import schedule
 import datetime
 from pymongo import MongoClient
-from bson import ObjectId
 import statistics
 
 baseMongoURL = "mongodb+srv://AD-DB-User:%26h8Xt2Q%23V%26SG@cluster0.pglda.mongodb.net/SensorThingsDashboard"

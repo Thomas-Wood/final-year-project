@@ -21,8 +21,6 @@ def home():
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    # Connect to the mongoDB server and retrieve any customisations
-    # TODO
 
     addressParameters = get_current_parameters()
 
@@ -37,12 +35,6 @@ def dashboard():
 
     # Sort Things by ID
     thingsAndDatastreams.sort(key=lambda thing: thing['@iot.id'])
-
-    # If any FROST entities are missing from MongoDB, add them with default settings
-    # TODO
-
-    # Pass data to template to dynamically generate the checkboxes
-    # TODO
 
     return render_template('dashboard.html',
                            thingsAndDatastreams=thingsAndDatastreams,
