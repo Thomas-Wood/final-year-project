@@ -47,6 +47,7 @@ def checkForNewAlerts():
                     "endTime": "",
                     "ruleID": str(rule['_id']),
                     "datastreamID": str(rule['dataStreamID']),
+                    "dataForm": str(rule['dataForm']),
                     "comparator": str(rule['comparator']),
                     "limit": str(rule['limit']),
                     "severity": str(rule['severity'])

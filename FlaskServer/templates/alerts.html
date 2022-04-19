@@ -9,18 +9,29 @@
   <thead>
     <tr>
       <th scope="col">Start Time</th>
-      <th scope="col">End Time</th>
       <th scope="col">Datastream</th>
       <th scope="col">Rule</th>
       <th scope="col">Severity</th>
     </tr>
   </thead>
   <tbody>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    {% for alert in alerts %}
+    {% if alert['endTime'] == "" %}
+    <tr>
+      <td>{{ alert['startTime'] }}</td>
+      <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
+      <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
+      {% if alert['severity'] == 'High' %}
+        <td class="bg-danger">
+      {% elif alert['severity'] == 'Medium' %}
+        <td class="bg-warning">
+      {% else %}
+        <td class="bg-info">
+      {% endif %}
+      {{ alert['severity'] }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
   </tbody>
 </table>
 
@@ -36,11 +47,24 @@
     </tr>
   </thead>
   <tbody>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    {% for alert in alerts %}
+    {% if alert['endTime'] != "" %}
+    <tr>
+      <td>{{ alert['startTime'] }}</td>
+      <td>{{ alert['endTime'] }}</td>
+      <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
+      <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
+      {% if alert['severity'] == 'High' %}
+        <td class="bg-danger">
+      {% elif alert['severity'] == 'Medium' %}
+        <td class="bg-warning">
+      {% else %}
+        <td class="bg-info">
+      {% endif %}
+      {{ alert['severity'] }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
   </tbody>
 </table>
 

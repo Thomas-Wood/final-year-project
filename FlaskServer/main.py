@@ -1,3 +1,4 @@
+import datetime
 import logging
 import requests
 import json
@@ -53,7 +54,34 @@ def alerts():
 
     addressParameters = get_current_parameters()
 
-    alerts = []
+    # Connect to MongoDB and get the rules for this server
+    client = MongoClient(
+        "mongodb+srv://AD-DB-User:%26h8Xt2Q%23V%26SG@cluster0.pglda.mongodb.net/SensorThingsDashboard")
+    serverAddress = request.args.get('address')
+    collectionName = 'Alerts-' + serverAddress
+    db = client['SensorThingsDashboard'][collectionName]
+    myCursor = None
+    myCursor = db.find()
+    alerts = list(myCursor)
+
+    # Sort Alerts by Date
+    alerts.sort(key=lambda alert: alert['endTime'], reverse=True)
+
+    # Select only 100 most recent alerts
+    alerts = alerts[:100]
+
+    for alert in alerts:
+        # Get the name of the datastream
+        datastreamName = json.loads(bytes.decode(
+            requests.get(serverAddress + '/Datastreams(' + alert['datastreamID'] + ")").content))['name']
+        alert['dataStreamName'] = datastreamName
+
+        # Format the timestamp
+        alert['startTime'] = str(datetime.datetime.fromtimestamp(
+            round(float(alert['startTime']))))
+        if alert['endTime'] != "":
+            alert['endTime'] = str(datetime.datetime.fromtimestamp(
+                round(float(alert['endTime']))))
 
     return render_template('alerts.html', alerts=alerts, addressParameters=addressParameters)
 

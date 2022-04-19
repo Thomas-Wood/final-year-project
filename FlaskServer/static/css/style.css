@@ -4,11 +4,15 @@ html {
 }
 
 .background-primary {
-  background-color: #a7b3ff;
+  background-color: #c9d1ff;
 }
 
 .centred {
   display: grid;
   margin: auto;
   text-align: center;
+}
+
+td {
+  border-radius: 15px;
 }
