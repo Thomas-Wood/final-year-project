@@ -1,5 +1,6 @@
 import simulatedSensorTemplate
 import datetime
+import random
 
 
 class HzVesselSensor(simulatedSensorTemplate.simulatedSensorTemplate):
@@ -30,13 +31,15 @@ class HzVesselSensor(simulatedSensorTemplate.simulatedSensorTemplate):
                 else:  # Start spinning down
                     self.spinState = 'down'
         elif self.spinState == 'up':
-            workingHz += secondsPassed*self.spinAcceleration
+            workingHz += secondsPassed * \
+                self.spinAcceleration * random.uniform(0.5, 1.5)
             if workingHz > self.upperLimit:
                 workingHz = self.upperLimit
                 self.spinState = 'static'
                 self.staticTime = datetime.datetime.now()
         else:
-            workingHz -= secondsPassed*self.spinAcceleration
+            workingHz -= secondsPassed * \
+                self.spinAcceleration * random.uniform(0.5, 1.5)
             if workingHz < self.lowerLimit:
                 workingHz = self.lowerLimit
                 self.spinState = 'static'

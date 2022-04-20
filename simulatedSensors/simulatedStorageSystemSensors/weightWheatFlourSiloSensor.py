@@ -1,5 +1,6 @@
 import simulatedSensorTemplate
 import datetime
+import random
 
 
 class weightWheatFlourSiloSensor(simulatedSensorTemplate.simulatedSensorTemplate):
@@ -20,7 +21,8 @@ class weightWheatFlourSiloSensor(simulatedSensorTemplate.simulatedSensorTemplate
         workingWeightInSilo = self.lastResult
 
         # Standard usage
-        workingWeightInSilo -= self.usePerSecond*secondsPassed
+        workingWeightInSilo -= self.usePerSecond * \
+            secondsPassed * random.uniform(0.5, 1.5)
 
         # Add any refill amounts
         requiresRefill = self.lastResult <= self.startRefillLimit

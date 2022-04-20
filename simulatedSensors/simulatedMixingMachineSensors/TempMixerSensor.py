@@ -1,5 +1,6 @@
 import simulatedSensorTemplate
 import datetime
+import random
 
 
 class TempMixerSensor(simulatedSensorTemplate.simulatedSensorTemplate):
@@ -33,11 +34,13 @@ class TempMixerSensor(simulatedSensorTemplate.simulatedSensorTemplate):
             self.lastStateChangeTime = datetime.datetime.now()
 
         if self.tempDirectionChange == 'up':  # Temp is increasing
-            workingTemp += self.warmUpRate*secondsPassed
+            workingTemp += self.warmUpRate * \
+                secondsPassed * random.uniform(0.5, 1.5)
             if workingTemp > self.upperLimit:
                 workingTemp = self.upperLimit
         else:  # Temp is descreasing
-            workingTemp -= self.coolDownRate*secondsPassed
+            workingTemp -= self.coolDownRate * \
+                secondsPassed * random.uniform(0.5, 1.5)
             if workingTemp < self.lowerLimit:
                 workingTemp = self.lowerLimit
 
