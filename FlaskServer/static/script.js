@@ -86,6 +86,15 @@ function toggleVisibleGraphs(datastreamID) {
   }
 }
 
+function toggleDropDownIcon(elementID) {
+  var x = document.getElementById(elementID);
+  if (x.style.transform === "rotate(270deg)") {
+    x.style.transform = "rotate(0deg)"
+  } else {
+    x.style.transform = "rotate(270deg)"
+  }
+}
+
 function calculateState(operand1, comparator, operand2) {
   if (comparator=="Less Than") {
     return operand1 < operand2

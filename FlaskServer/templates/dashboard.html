@@ -8,8 +8,10 @@
 {% for thing in thingsAndDatastreams %}
 <div class="thingBorder card-primary">
   <div class="row justify-content-center thingHeader">
-    <button data-bs-toggle="collapse" data-bs-target="#thing-{{thing['@iot.id']}}" type="button" class="btn btn-info">
+    {% set currentThingID = thing['@iot.id'] %}
+    <button data-bs-toggle="collapse" data-bs-target="#thing-{{thing['@iot.id']}}" type="button" class="btn btn-info" onclick="toggleDropDownIcon('drop-down-icon-{{currentThingID}}')">
       <h2 class="centred">{{ thing['name'] }}</h2>
+      <img src="static/drop down icon.png" width="20px" id="drop-down-icon-{{currentThingID}}">
     </button>
   </div>
   <div id="thing-{{thing['@iot.id']}}" class="collapse show">
