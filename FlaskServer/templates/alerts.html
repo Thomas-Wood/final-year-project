@@ -3,6 +3,9 @@
 {% block content %}
 
 <h2 class="background-primary centred">Alerts</h2>
+<p class="centred" style="margin: 20px">
+  The alerts page shows if and when any rules have been triggered
+</p>
 
 <script language = "JavaScript">
   $(document).ready(function() {
@@ -12,68 +15,72 @@
   });
 </script>
 
-<h3>Current Alerts</h3>
-<table class="table" style="margin-bottom:50px">
-  <thead>
-    <tr>
-      <th scope="col">Start Time</th>
-      <th scope="col">Datastream</th>
-      <th scope="col">Rule</th>
-      <th scope="col">Severity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for alert in alerts %}
-    {% if alert['endTime'] == "" %}
-    <tr>
-      <td>{{ alert['startTime'] }}</td>
-      <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
-      <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
-      {% if alert['severity'] == 'High' %}
-        <td class="bg-danger">
-      {% elif alert['severity'] == 'Medium' %}
-        <td class="bg-warning">
-      {% else %}
-        <td class="bg-info">
+<div class="basicBorder">
+  <h3 class="centred">Current Alerts</h3>
+  <table class="table" style="margin-bottom:50px">
+    <thead>
+      <tr>
+        <th scope="col">Start Time</th>
+        <th scope="col">Datastream</th>
+        <th scope="col">Rule</th>
+        <th scope="col">Severity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for alert in alerts %}
+      {% if alert['endTime'] == "" %}
+      <tr>
+        <td>{{ alert['startTime'] }}</td>
+        <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
+        <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
+        {% if alert['severity'] == 'High' %}
+          <td class="bg-danger">
+        {% elif alert['severity'] == 'Medium' %}
+          <td class="bg-warning">
+        {% else %}
+          <td class="bg-info">
+        {% endif %}
+        {{ alert['severity'] }}</td>
+      </tr>
       {% endif %}
-      {{ alert['severity'] }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-  </tbody>
-</table>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-<h3>Old Alerts</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Start Time</th>
-      <th scope="col">End Time</th>
-      <th scope="col">Datastream</th>
-      <th scope="col">Rule</th>
-      <th scope="col">Severity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for alert in alerts %}
-    {% if alert['endTime'] != "" %}
-    <tr>
-      <td>{{ alert['startTime'] }}</td>
-      <td>{{ alert['endTime'] }}</td>
-      <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
-      <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
-      {% if alert['severity'] == 'High' %}
-        <td class="bg-danger">
-      {% elif alert['severity'] == 'Medium' %}
-        <td class="bg-warning">
-      {% else %}
-        <td class="bg-info">
+<div class="basicBorder">
+  <h3 class="centred">Expired Alerts</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Datastream</th>
+        <th scope="col">Rule</th>
+        <th scope="col">Severity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for alert in alerts %}
+      {% if alert['endTime'] != "" %}
+      <tr>
+        <td>{{ alert['startTime'] }}</td>
+        <td>{{ alert['endTime'] }}</td>
+        <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
+        <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
+        {% if alert['severity'] == 'High' %}
+          <td class="bg-danger">
+        {% elif alert['severity'] == 'Medium' %}
+          <td class="bg-warning">
+        {% else %}
+          <td class="bg-info">
+        {% endif %}
+        {{ alert['severity'] }}</td>
+      </tr>
       {% endif %}
-      {{ alert['severity'] }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-  </tbody>
-</table>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}

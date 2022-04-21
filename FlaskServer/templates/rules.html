@@ -2,111 +2,118 @@
 
 {% block content %}
 
-<h2 class="background-primary">Welcome to the rules page!</h2>
+<h2 class="background-primary centred">Rules</h2>
+<p class="centred" style="margin: 20px">
+  The rules page is where you can create and manage triggers for alerts based on sensor data
+</p>
 
-<h3>Create New Rule</h3>
-<form method="post" action="{{ url_for('add_rule') }}{{ addressParameters }}" enctype="multipart/form-data">
-  <div class="row">
-    <div class="col">
-      <select class="form-select" name="dataForm">
-        <option>Most Recent Value</option>
-        <option>1 hour Average</option>
-        <option>5 min Average</option>
-        <option>1 min Average</option>
-      </select>
+<div class="basicBorder">
+  <h3 class="centred" style="margin-bottom: 20px">Create New Rule</h3>
+  <form method="post" action="{{ url_for('add_rule') }}{{ addressParameters }}" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col">
+        <select class="form-select" name="dataForm">
+          <option>Most Recent Value</option>
+          <option>1 hour Average</option>
+          <option>5 min Average</option>
+          <option>1 min Average</option>
+        </select>
+      </div>
+      <div class="col-1">
+        <h4 class="text-center">From</h4>
+      </div>
+      <div class="col">
+        <select class="form-select" name="dataStream" id="dataStreamOptions">
+          <option>Loading DataStreams...</option>
+          <script language = "JavaScript">
+            $(document).ready(function() {
+              setDataStreamOptions("{{ serverAddress }}", "dataStreamOptions")
+            });
+          </script>
+        </select>
+      </div>
+      <div class="col-1">
+        <h4 class="text-center">Is</h4>
+      </div>
+      <div class="col">
+        <select class="form-select" name="comparator">
+          <option>More Than</option>
+          <option>Less Than</option>
+        </select>
+      </div>
+      <div class="col">
+        <input type="number" step="any" class="form-control" placeholder="5000" name="limit">
+      </div>
     </div>
-    <div class="col-1">
-      <h4 class="text-center">From</h4>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <h4 class="text-center">Severity if triggered is</h4>
+      </div>
+      <div class="col-6">
+        <select class="form-select" name="severity">
+          <option class="text-danger">High</option>
+          <option class="text-warning">Medium</option>
+          <option class="text-info">Low</option>
+        </select>
+      </div>
     </div>
-    <div class="col">
-      <select class="form-select" name="dataStream" id="dataStreamOptions">
-        <option>Loading DataStreams...</option>
-        <script language = "JavaScript">
-          $(document).ready(function() {
-            setDataStreamOptions("{{ serverAddress }}", "dataStreamOptions")
-          });
-        </script>
-      </select>
+    <div class="row">
+      <div class="col text-center" style="padding: 20px">
+        <button type="submit" class="btn btn-success">Create Rule</button>
+      </div>
     </div>
-    <div class="col-1">
-      <h4 class="text-center">Is</h4>
-    </div>
-    <div class="col">
-      <select class="form-select" name="comparator">
-        <option>More Than</option>
-        <option>Less Than</option>
-      </select>
-    </div>
-    <div class="col">
-      <input type="number" step="any" class="form-control" placeholder="5000" name="limit">
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-6">
-      <h4 class="text-center">Severity if triggered is</h4>
-    </div>
-    <div class="col-6">
-      <select class="form-select" name="severity">
-        <option class="text-danger">High</option>
-        <option class="text-warning">Medium</option>
-        <option class="text-info">Low</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col text-center" style="padding: 20px">
-      <button type="submit" class="btn btn-success">Create Rule</button>
-    </div>
-  </div>
-</form>
+  </form>
+</div>
 
-<h3>Current Rules</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Data Form</th>
-      <th scope="col">DataStream</th>
-      <th scope="col">Comparator</th>
-      <th scope="col">Limit</th>
-      <th scope="col">Current State</th>
-      <th scope="col">Severity</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for rule in rules %}
+<div class="basicBorder">
+  <h3 class="centred">Current Rules</h3>
+  <table class="table">
+    <thead>
       <tr>
-        <td>{{ rule['dataForm'] }}</td>
-        <td id="datastream-{{ rule['_id'] }}">{{ rule['dataStreamID'] }}</td>
-          <script language = "JavaScript">
-            $(document).ready(function() {
-              setDataStreamName("{{ rule['dataStreamID'] }}", "{{ serverAddress }}", "datastream-{{ rule['_id'] }}")
-            });
-          </script>
-        <td>{{ rule['comparator'] }}</td>
-        <td>{{ rule['limit'] }}</td>
-        <td id="state-{{ rule['_id'] }}">Calculating state...</td>
-          <script language = "JavaScript">
-            $(document).ready(function() {
-              refreshStatesLoop("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
-            });
-          </script>
-        <td>{{ rule['severity'] }}</td>
-        <td>
-          <form method="post" action="{{ url_for('delete_rule') }}{{ addressParameters }}" enctype="multipart/form-data">
-            <input class="form-control" name="ruleID" value="{{rule['_id']}}" hidden="true">
-            <button type="submit" class="btn btn-danger">
-              <!-- Source: https://icons.getbootstrap.com/icons/trash-fill/ -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-              </svg>
-            </button>
-          </form>
-        </td>
+        <th scope="col">Data Form</th>
+        <th scope="col">DataStream</th>
+        <th scope="col">Comparator</th>
+        <th scope="col">Limit</th>
+        <th scope="col">Current State</th>
+        <th scope="col">Severity</th>
+        <th scope="col">Delete</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for rule in rules %}
+        <tr>
+          <td>{{ rule['dataForm'] }}</td>
+          <td id="datastream-{{ rule['_id'] }}">{{ rule['dataStreamID'] }}</td>
+            <script language = "JavaScript">
+              $(document).ready(function() {
+                setDataStreamName("{{ rule['dataStreamID'] }}", "{{ serverAddress }}", "datastream-{{ rule['_id'] }}")
+              });
+            </script>
+          <td>{{ rule['comparator'] }}</td>
+          <td>{{ rule['limit'] }}</td>
+          <td id="state-{{ rule['_id'] }}">Calculating state...</td>
+            <script language = "JavaScript">
+              $(document).ready(function() {
+                refreshStatesLoop("{{ rule['dataForm'] }}", "{{ rule['dataStreamID'] }}", "{{ rule['comparator'] }}", "{{ rule['limit'] }}", "{{ serverAddress }}", "state-{{ rule['_id'] }}")
+              });
+            </script>
+          <td>{{ rule['severity'] }}</td>
+          <td>
+            <form method="post" action="{{ url_for('delete_rule') }}{{ addressParameters }}" enctype="multipart/form-data">
+              <input class="form-control" name="ruleID" value="{{rule['_id']}}" hidden="true">
+              <button type="submit" class="btn btn-danger">
+                <!-- Source: https://icons.getbootstrap.com/icons/trash-fill/ -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg>
+              </button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
