@@ -58,7 +58,7 @@ def alerts():
     alerts = list(myCursor)
 
     # Sort Alerts by Date
-    alerts.sort(key=lambda alert: alert['endTime'], reverse=True)
+    alerts.sort(key=lambda alert: alert['startTime'], reverse=True)
 
     # Select only 50 most recent alerts
     alerts = alerts[:50]

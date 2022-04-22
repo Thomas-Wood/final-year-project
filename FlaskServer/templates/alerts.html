@@ -28,21 +28,21 @@
     </thead>
     <tbody>
       {% for alert in alerts %}
-      {% if alert['endTime'] == "" %}
-      <tr>
-        <td>{{ alert['startTime'] }}</td>
-        <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
-        <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
-        {% if alert['severity'] == 'High' %}
-          <td class="bg-danger">
-        {% elif alert['severity'] == 'Medium' %}
-          <td class="bg-warning">
-        {% else %}
-          <td class="bg-info">
+        {% if alert['endTime'] == "" %}
+        <tr>
+          <td>{{ alert['startTime'] }}</td>
+          <td>{{ alert['datastreamID']}} - {{ alert['dataStreamName'] }}</td>
+          <td>{{ alert['dataForm'] }} {{ alert['comparator'] }} {{ alert['limit'] }}</td>
+          {% if alert['severity'] == 'High' %}
+            <td class="bg-danger">
+          {% elif alert['severity'] == 'Medium' %}
+            <td class="bg-warning">
+          {% else %}
+            <td class="bg-info">
+          {% endif %}
+          {{ alert['severity'] }}</td>
+        </tr>
         {% endif %}
-        {{ alert['severity'] }}</td>
-      </tr>
-      {% endif %}
       {% endfor %}
     </tbody>
   </table>
