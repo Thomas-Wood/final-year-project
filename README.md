@@ -85,3 +85,25 @@ http://localhost:8080/FROST-Server/v1.0
 http://localhost:8080/FROST-Server/v1.0/Datastreams(1)/Observations
 
 http://localhost:8080/FROST-Server/v1.0/Datastreams
+
+## Languages and tools used in development
+
+- Python Version 3.7
+- Javascript [ECMAScript 2018](https://www.w3schools.com/Js/js_2018.asp)
+- Docker 4.6.1
+
+## External libraries and sources
+
+### Python Libraries
+
+- Flask 2.0.2
+- Jinga2 3.0.3
+- Pymongo 4.0
+- [Schedule 1.1.0](https://pypi.org/project/schedule/)
+
+### Javascript and HTML libraries and sources
+
+- Moment 2.14.1
+- Highstock 4.2.6
+- Bootstrap 5.1.3
+- Jquery 3.6.0
