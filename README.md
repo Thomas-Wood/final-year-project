@@ -107,3 +107,7 @@ http://localhost:8080/FROST-Server/v1.0/Datastreams
 - Highstock 4.2.6
 - Bootstrap 5.1.3
 - Jquery 3.6.0
+
+## Referenced Code
+
+Some Javascript code related to highcharts has been based upon this [tutorial from sensorup](https://developers.sensorup.com/tutorials/chart/)
