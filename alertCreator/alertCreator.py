@@ -65,7 +65,6 @@ def checkForNewAlerts():
 
 
 def ruleHasActiveAlert(rule, activeAlerts):
-    # print(activeAlerts)
     for alert in activeAlerts:
         if alert['ruleID'] == str(rule['_id']):
             return True
